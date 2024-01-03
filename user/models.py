@@ -31,6 +31,7 @@ class ProfileManager(BaseUserManager):
             username=username,
             email=email,
             password=password,
+            is_active=True,
             **extra_fields
         )
         user.save(using=self._db)
@@ -38,14 +39,10 @@ class ProfileManager(BaseUserManager):
 
 
 class Profile(AbstractBaseUser, PermissionsMixin):
-    STATUS = [
-        ("Active", "Active"),
-        ("Not Active", "Not Active"),
-    ]
     id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=50, unique=False)
     email = models.CharField(max_length=50, unique=True, default='')
-    is_active = models.CharField(max_length=15, choices=STATUS)
+    is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     groups = models.ManyToManyField(
         'auth.Group',

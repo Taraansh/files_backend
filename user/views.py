@@ -44,7 +44,7 @@ def signup_for_client(request):
         user = Profile(
             username=username,
             email=email,
-            is_active="Active",
+            is_active=True,
             password=user_password_hashed,
         )
         user.save()
@@ -62,16 +62,14 @@ def signup_for_operator(request):
     if request.method == 'POST':
         username = request.data.get('username')
         email = request.data.get('email')
-        is_staff = request.data.get('is_staff')
         password = request.data.get('password')
-        print(is_staff)
         # Create a new Profile instance
         user_password_hashed = make_password(password)
         user = Profile(
             username=username,
             email=email,
-            is_active="Active",
-            is_staff=is_staff,
+            is_active=True,
+            is_staff=True,
             password=user_password_hashed,
         )
         user.save()
