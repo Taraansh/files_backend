@@ -1,4 +1,3 @@
-import json
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from django.contrib.auth.hashers import make_password
@@ -66,3 +65,13 @@ class Profile(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username
+
+
+class File(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, related_name="the_user")
+    file = models.FileField(upload_to='file/', null=False, blank=False)
+
+    def __str__(self):
+        return self.user.username
