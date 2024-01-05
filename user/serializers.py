@@ -1,6 +1,6 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
-from user.models import Profile
+from user.models import Profile, File
 from django.contrib.auth.hashers import make_password
 
 
@@ -28,3 +28,12 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['email'] = user.email
         token['is_staff'] = user.is_staff
         return token
+
+
+class FileSerializer(serializers.ModelSerializer):
+    file = serializers.FileField()
+
+    class Meta:
+        model = File
+        # fields = '__all__'
+        fields = ['file', 'user', 'id']
