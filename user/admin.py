@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.hashers import make_password
-from user.models import Profile
+from user.models import Profile, File
 
 # Register your models here.
 
@@ -14,3 +14,4 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Profile, ProfileAdmin)
+admin.site.register(File)
